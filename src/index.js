@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from 'Modules';
 
-const Index = () => <div>Hello React.dj!</div>;
+import AppRouter from './routers/AppRouter';
 
-ReactDOM.render(<Index />, document.getElementById('index'));
+ReactDOM.render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>,
+  document.getElementById('index')
+);
