@@ -5,11 +5,12 @@ import playlistReducer from 'Modules/playlist';
 
 const middlewares = [thunk];
 
-// if (process.env.NODE_ENV === 'development') {
-//   const { logger } = require(`redux-logger`);
+const { logger } =
+  process.env.NODE_ENV === 'development' ? require('redux-logger') : '';
 
-//   middlewares.push(logger);
-// }
+if (logger) {
+  middlewares.push(logger);
+}
 
 const rootReducer = combineReducers({ playlist: playlistReducer });
 

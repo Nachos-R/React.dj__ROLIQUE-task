@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import UploadPage from 'Components/UploadPage';
+import uuid from 'uuid';
 
+import UploadPage from 'Components/UploadPage';
 import { addTracks } from 'Modules/playlist';
 
 class UploadPageContainer extends Component {
@@ -11,8 +12,13 @@ class UploadPageContainer extends Component {
     addTracks: PropTypes.func.isRequired
   };
 
-  addTracksAndRedirect = tracks => {
+  addTracksAndRedirect = files => {
     const { history, addTracks } = this.props;
+    const tracks = files.map(track => ({
+      id: uuid(),
+      name: track.name,
+      url: track.preview
+    }));
 
     addTracks(tracks, history);
   };

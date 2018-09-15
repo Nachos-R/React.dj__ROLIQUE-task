@@ -35,27 +35,21 @@ class DropZone extends Component {
         <aside>
           <h2>Accepted files</h2>
           <ul>
-            {accepted.map(f => {
-              console.log(f);
-              return (
-                <li key={f.name}>
-                  {f.preview} - {f.size} bytes
-                </li>
-              );
-            })}
+            {accepted.map(f => (
+              <li key={f.name}>
+                {f.preview} - {f.size} bytes
+              </li>
+            ))}
           </ul>
         </aside>
         <aside>
           <h2>Accepted files</h2>
           <ul>
-            {rejected.map(f => {
-              console.log(f);
-              return (
-                <li key={f.name}>
-                  {f.name} - {f.size} bytes
-                </li>
-              );
-            })}
+            {rejected.map(f => (
+              <li key={f.name}>
+                {f.name} - {f.size} bytes
+              </li>
+            ))}
           </ul>
         </aside>
         <input

@@ -24,8 +24,13 @@
     "prettier/prettier": "error",
     "max-len": ["error", 80],
     "linebreak-style": ["error", "windows"],
-    "no-underscore-dangle": ["error", { "enforceInMethodNames": true }],
-    "no-console": ["error", { "allow": ["log"] }]
+    "no-underscore-dangle": [
+      "error",
+      { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }
+    ],
+    "no-console": ["error", { "allow": ["log"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "global-require": "error"
   },
   "env": {
     "browser": true
