@@ -1,79 +1,42 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Player from 'Components/Player';
 import Playlist from 'Components/Playlist';
 
-class Controller extends Component {
-  static propTypes = {
-    onRemove: PropTypes.func.isRequired,
-    first: PropTypes.bool,
-    second: PropTypes.bool
-  };
+const Controller = ({
+  nextClick,
+  prevClick,
+  playTrack,
+  removeTrack,
+  playlist,
+  index
+}) => (
+  <Fragment>
+    {playlist[0] && (
+      <div style={{ width: '50%', float: 'left' }}>
+        <Player
+          url={playlist[index].url}
+          nextClick={nextClick}
+          prevClick={prevClick}
+        />
+        <Playlist
+          playlist={playlist}
+          removeTrack={removeTrack}
+          playTrack={playTrack}
+        />
+      </div>
+    )}
+  </Fragment>
+);
 
-  state = {
-    playlist: [],
-    index: 0
-  };
-
-  static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.playlist !== state.playlist) {
-      return { playlist: nextProps.playlist };
-    }
-    return null;
-  }
-
-  nextClick = () => {
-    console.log('nextSong');
-    const { index, playlist } = this.state;
-    if (index < playlist.length - 1) {
-      this.setState(prevState => ({ index: prevState.index + 1 }));
-    }
-  };
-
-  prevClick = () => {
-    console.log('prevSong');
-    const { index } = this.state;
-    if (index > 0) {
-      this.setState(prevState => ({ index: prevState.index - 1 }));
-    }
-  };
-
-  playTrack = id => {
-    const { playlist } = this.state;
-    const trackIndex = playlist.findIndex(track => track.id === id);
-    console.log(trackIndex);
-    this.setState({ index: trackIndex });
-  };
-
-  removeTrack = id => {
-    const { onRemove, first, second } = this.props;
-    this.setState({ index: 0 });
-    return first ? onRemove(id, first) : onRemove(id, second);
-  };
-
-  render() {
-    const { playlist, index } = this.state;
-    console.log(index);
-    return (
-      <Fragment>
-        {playlist[0] && (
-          <div>
-            <Player
-              url={playlist[index].url}
-              nextClick={this.nextClick}
-              prevClick={this.prevClick}
-            />
-            <Playlist
-              playlist={playlist}
-              removeTrack={this.removeTrack}
-              playTrack={this.playTrack}
-            />
-          </div>
-        )}
-      </Fragment>
-    );
-  }
-}
+Controller.propTypes = {
+  removeTrack: PropTypes.func.isRequired,
+  nextClick: PropTypes.func.isRequired,
+  prevClick: PropTypes.func.isRequired,
+  playTrack: PropTypes.func.isRequired,
+  playlist: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
+  index: PropTypes.number.isRequired
+};
 
 export default Controller;

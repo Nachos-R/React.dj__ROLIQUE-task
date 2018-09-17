@@ -8,12 +8,12 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import PlayButton from './PlayButton';
 
 const Track = ({ songName, onRemove, onPlay }) => (
-  <ListItem button onClick={onPlay}>
+  <ListItem button>
     <ListItemIcon>
       <InboxIcon />
     </ListItemIcon>
-    <ListItemText primary={songName} />
-    <PlayButton value="X" onClick={onRemove} style={{ 'z-index': 100 }} />
+    <ListItemText primary={songName} onClick={onPlay} />
+    <PlayButton value="X" onClick={onRemove} />
   </ListItem>
 );
 

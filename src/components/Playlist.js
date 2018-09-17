@@ -8,7 +8,7 @@ import Track from './Track';
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: '50%',
+    maxWidth: '100%',
     maxHeight: 500,
     overflow: 'scroll',
     backgroundColor: theme.palette.background.paper

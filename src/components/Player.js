@@ -72,6 +72,7 @@ class ControllerPage extends Component {
           onPlay={this.onPlay}
           onPause={this.onPause}
           playbackRate={playbackRate}
+          style={{ width: '50%' }}
         />
         <PlayButton value="prev" onClick={prevClick} />
         <PlayButton

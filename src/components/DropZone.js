@@ -5,8 +5,8 @@ import Dropzone from 'react-dropzone';
 class DropZone extends Component {
   static propTypes = {
     onDrop: PropTypes.func.isRequired,
-    first: PropTypes.bool,
-    second: PropTypes.bool
+    first: PropTypes.number,
+    second: PropTypes.number
   };
 
   onDrop = accepted => {
@@ -35,5 +35,10 @@ class DropZone extends Component {
     );
   }
 }
+
+DropZone.defaultProps = {
+  first: 0,
+  second: 0
+};
 
 export default DropZone;
