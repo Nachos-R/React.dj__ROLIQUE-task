@@ -12,19 +12,21 @@ class UploadPageContainer extends Component {
     addTracks: PropTypes.func.isRequired
   };
 
-  addTracksAndRedirect = files => {
-    const { history, addTracks } = this.props;
+  onDrop = (files, zone) => {
+    const { addTracks } = this.props;
     const tracks = files.map(track => ({
       id: uuid(),
       name: track.name,
-      url: track.preview
+      url: track.preview,
+      currIndex: 0
     }));
 
-    addTracks(tracks, history);
+    addTracks(tracks, zone);
   };
 
   render() {
-    return <UploadPage onClick={this.addTracksAndRedirect} />;
+    const { history } = this.props;
+    return <UploadPage onDrop={this.onDrop} history={history} />;
   }
 }
 

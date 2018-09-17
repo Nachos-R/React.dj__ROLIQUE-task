@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 
-import Song from './Song';
+import Track from './Track';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: '50%',
+    maxHeight: 500,
+    overflow: 'scroll',
     backgroundColor: theme.palette.background.paper
   }
 });
@@ -17,7 +19,7 @@ const PlayList = ({ classes, playlist, removeTrack, playTrack }) => (
   <div className={classes.root}>
     <List component="nav">
       {playlist.map(song => (
-        <Song
+        <Track
           key={song.id}
           songName={song.name}
           onPlay={() => playTrack(song.id)}

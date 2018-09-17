@@ -7,20 +7,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/Inbox';
 import PlayButton from './PlayButton';
 
-const Song = ({ songName, onRemove, onPlay }) => (
+const Track = ({ songName, onRemove, onPlay }) => (
   <ListItem button onClick={onPlay}>
     <ListItemIcon>
       <InboxIcon />
     </ListItemIcon>
     <ListItemText primary={songName} />
-    <PlayButton value="X" onClick={onRemove} />
+    <PlayButton value="X" onClick={onRemove} style={{ 'z-index': 100 }} />
   </ListItem>
 );
 
-Song.propTypes = {
+Track.propTypes = {
   songName: PropTypes.string.isRequired,
   onPlay: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 };
 
-export default Song;
+export default Track;

@@ -2,10 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Player from 'Components/Player';
-import Playlist from 'Components/Playlist';
-
 import { removeTrack } from 'Modules/playlist';
+import Controller from '../components/Controller';
 
 class ControllerPageContainer extends Component {
   static propTypes = {
@@ -13,60 +11,36 @@ class ControllerPageContainer extends Component {
   };
 
   state = {
-    playlist: [],
-    index: 0
+    playlists: { first: [], second: [] }
   };
 
   static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.playlist !== state.playlist) {
-      return { playlist: nextProps.playlist };
+    if (nextProps.playlists !== state.playlists) {
+      return { playlists: nextProps.playlist };
     }
     return null;
   }
 
-  nextClick = () => {
-    console.log('nextSong');
-    const { index, playlist } = this.state;
-    if (index < playlist.length - 1) {
-      this.setState(prevState => ({ index: prevState.index + 1 }));
-    }
-  };
-
-  prevClick = () => {
-    console.log('prevSong');
-    const { index } = this.state;
-    if (index > 0) {
-      this.setState(prevState => ({ index: prevState.index - 1 }));
-    }
-  };
-
-  playTrack = id => {
-    const { playlist } = this.state;
-    const trackIndex = playlist.findIndex(track => track.id === id);
-    console.log(trackIndex);
-    this.setState({ index: trackIndex });
+  onRemove = (id, zone) => {
+    const { removeTrack } = this.props;
+    removeTrack(id, zone);
   };
 
   render() {
-    const { playlist, index } = this.state;
-    const { removeTrack } = this.props;
+    const { playlists } = this.state;
     return (
-      <div>
-        {playlist.length > 0 && (
-          <Fragment>
-            <Player
-              url={playlist[index].url}
-              nextClick={this.nextClick}
-              prevClick={this.prevClick}
-            />
-            <Playlist
-              playlist={playlist}
-              removeTrack={removeTrack}
-              playTrack={this.playTrack}
-            />
-          </Fragment>
-        )}
-      </div>
+      <Fragment>
+        <Controller
+          playlist={playlists.first}
+          onRemove={this.onRemove}
+          first={1}
+        />
+        <Controller
+          playlist={playlists.second}
+          onRemove={this.onRemove}
+          second={2}
+        />
+      </Fragment>
     );
   }
 }
